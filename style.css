@@ -1,0 +1,242 @@
+/* Global reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f6d6e6 0%, #f7efe9 40%, #f0e6d8 100%);
+}
+
+/* full-screen heart image layer (subtle) */
+.stage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  font-size: 36px;
+  color: #8b1e3f;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.card {
+  width: min(520px, 90%);
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(139,30,63,0.15);
+  text-align: center;
+  position: relative;
+}
+
+.subtitle { color: #6a2230; margin-bottom: 18px; font-size: 18px; }
+
+.no-message {
+  min-height: 36px;
+  color: #7a1f3a;
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-style: italic;
+  transition: opacity 180ms ease, transform 180ms ease;
+  opacity: 0.95;
+}
+
+.actions { position: relative; height: 140px; }
+
+button { 
+  padding: 12px 28px; 
+  border-radius: 10px; 
+  border: none; 
+  cursor: pointer; 
+  font-size: 18px; 
+  transition: transform 250ms ease, box-shadow 250ms ease; 
+}
+
+.yes-button {
+  background: linear-gradient(90deg,#ff7ab6,#ff3b8e);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,59,142,0.25);
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%) scale(var(--yes-scale, 1));
+  transform-origin: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.yes-button:hover { transform: translate(-50%, -50%) scale(calc(var(--yes-scale,1) * 1.03)); }
+
+.no-button {
+  background: #ffffff;
+  color: #6a2230;
+  border: 2px solid #e0a2b8;
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+}
+.no-button:hover { transform: translate(-50%, -50%) scale(1.02); }
+.overlay { position: fixed; inset: 0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.45); z-index: 999; }
+.overlay.hidden { display: none; }
+.overlay-content { background: white; padding: 36px 40px; border-radius: 14px; text-align:center; box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+.overlay-content h2 { color: #d81e5b; font-size: 28px; margin-bottom: 8px; }
+.heartburst { font-size: 32px; animation: pop 1s ease infinite alternate; }
+
+/* close button inside overlay */
+.overlay-content { position: relative; }
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #7a1f3a;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.close-button:hover { background: rgba(216,30,91,0.08); transform: scale(1.05); }
+
+@keyframes pop { from { transform: scale(1);} to { transform: scale(1.25);} }
+
+/* decorative moving hearts (background) */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.heart {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  from { transform: translateY(-20vh) rotate(-10deg) scale(0.9); opacity: 0.9; }
+  50% { transform: translateY(40vh) rotate(120deg) scale(1.05); }
+  to { transform: translateY(120vh) rotate(360deg) scale(0.8); opacity: 0; }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('../heart-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Iced coffee background effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(200, 150, 100, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(100, 70, 40, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* (removed a static horizontal hearts layer to avoid a repeated line across the screen) */
+
+/* Additional heart animation layers */
+.hearts-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+
+
+.box {
+  border: 3px solid #ff69b4;
+  background: rgba(255, 192, 203, 0.95);
+  padding: 30px;
+  width: 400px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.center-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yes-button {
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+}
+
+.yes-button:hover {
+  background-color: #ff1493;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.no-button {
+  background-color: #cccccc;
+  color: #333;
+}
+
+.no-button:hover {
+  background-color: #999999;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* shake animation for No button feedback */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px) rotate(-6deg); }
+  50% { transform: translateX(6px) rotate(6deg); }
+  75% { transform: translateX(-4px) rotate(-3deg); }
+  100% { transform: translateX(0); }
+}
